@@ -37,7 +37,7 @@ Provide a delete button to allow users to remove a task from the list.
 Filter Tasks
 
 npm start
-Open the application in your browser at http://localhost:3000.
+Open the application in your browser at https://todolistapp-reactapp.netlify.app.
 
 Technologies Used
 React.js

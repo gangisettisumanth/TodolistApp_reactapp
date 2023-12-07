@@ -3,29 +3,32 @@ import React, { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const TodoList = ({ todos, dispatch, setEditTodoText }) => {
+const TodoList = ({ todos, dispatch, setEditTodoText, showCompleted }) => {
   return (
     <ul>
       {todos.map((todo) => (
-        <li key={todo.id}>
-          <span
-            style={{
-              textDecoration: todo.completed ? 'line-through' : 'none',
-              color: todo.completed ? 'red' : 'black',
-              cursor: 'pointer',
-              textAlign: 'left',
-            }}
-            onClick={() => dispatch({ type: 'TOGGLE_TODO', payload: todo.id })}
-          >
-            {todo.title}
-          </span>
-          <button onClick={() => setEditTodoText(todo.id)} style={{ width: '90px', marginLeft: '10px' }}>
-            Edit
-          </button>
-          <button onClick={() => dispatch({ type: 'DELETE_TODO', payload: todo.id })} style={{ width: '90px', marginLeft: '10px' }}>
-            Delete
-          </button>
-        </li>
+        
+        (!showCompleted || todo.completed) && (
+          <li key={todo.id}>
+            <span
+              style={{
+                textDecoration: todo.completed ? 'line-through' : 'none',
+                color: todo.completed ? 'red' : 'black',
+                cursor: 'pointer',
+                textAlign: 'left',
+              }}
+              onClick={() => dispatch({ type: 'TOGGLE_TODO', payload: todo.id })}
+            >
+              {todo.title}
+            </span>
+            <button onClick={() => setEditTodoText(todo.id)} style={{ width: '90px', marginLeft: '10px' }}>
+              Edit
+            </button>
+            <button onClick={() => dispatch({ type: 'DELETE_TODO', payload: todo.id })} style={{ width: '90px', marginLeft: '10px' }}>
+              Delete
+            </button>
+          </li>
+        )
       ))}
     </ul>
   );
@@ -68,6 +71,7 @@ function todoReducer(state, action) {
 const App = () => {
   const [state, dispatch] = useReducer(todoReducer, initialState);
   const [newTodo, setNewTodo] = useState('');
+  const [showCompleted, setShowCompleted] = useState(false);
 
   useEffect(() => {
     axios
@@ -110,6 +114,10 @@ const App = () => {
     }
   };
 
+  const toggleShowCompleted = () => {
+    setShowCompleted(!showCompleted);
+  };
+
   return (
     <div className="App">
       <h1>TodoList App</h1>
@@ -130,9 +138,10 @@ const App = () => {
         <button onClick={state.editedTodo !== null ? updateTodo : addTodo}>
           {state.editedTodo !== null ? 'Update Task' : 'Add Task'}
         </button>
+        <button onClick={toggleShowCompleted}>{showCompleted ? 'Show All' : 'Show Completed'}</button>
       </div>
 
-      <TodoList todos={state.todos} dispatch={dispatch} setEditTodoText={setEditTodoText} />
+      <TodoList todos={state.todos} dispatch={dispatch} setEditTodoText={setEditTodoText} showCompleted={showCompleted} />
     </div>
   );
 };

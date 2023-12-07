@@ -1,0 +1,120 @@
+
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+}
+
+.App {
+  text-align: center;
+  margin: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+input {
+  padding: 8px;
+  margin-right: 8px;
+}
+
+button {
+  padding: 8px;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+li span {
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+button {
+  margin-left: 8px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 13px;
+
+}
+
+button:hover {
+  background-color: #c82333;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+label {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+
+
+
+
+/* Mobile view */
+@media only screen and (max-width: 600px) {
+  
+  li {
+    flex-direction: column;
+    padding: 20px;
+  }
+  li>button{
+    margin: 10px;
+  }
+    .box {
+      display: flex;
+      flex-direction: column;
+      gap:10px;
+  
+    }
+}
+
+/* Tablet view */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  li {
+    flex-direction: row;
+
+  }
+  
+}
+
+/* Laptop view */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  li {
+      flex-direction: row;
+  
+    }
+  
+}
+
+/* Desktop view */
+@media only screen and (min-width: 1025px) {
+  li {
+      flex-direction: row;
+  
+    }
+  
+}
+
